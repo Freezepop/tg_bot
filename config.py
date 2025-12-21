@@ -1,0 +1,8 @@
+import os
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+MAX_FILES = 10
+
+TELETHON_API_ID = os.getenv("TELETHON_API_ID")
+TELETHON_API_HASH = os.getenv("TELETHON_API_HASH")
+TELETHON_SESSION = os.getenv("TELETHON_SESSION")

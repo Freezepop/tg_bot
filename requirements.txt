@@ -1,0 +1,6 @@
+pyTelegramBotAPI
+pandas
+openpyxl
+beautifulsoup4
+lxml
+excel
