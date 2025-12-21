@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tg-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tg-bot
+  template:
+    metadata:
+      labels:
+        app: tg-bot
+    spec:
+      containers:
+      - name: bot
+        image: tg-bot
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: BOT_TOKEN
+          value: "*"
+        - name: MAX_FILES
+          value: "10"
+        - name: TELETHON_API_ID
+          value: "*"
+        - name: TELETHON_API_HASH
+          value: "*"
+        - name: TELETHON_SESSION
+          value: "*"

@@ -4,3 +4,4 @@ openpyxl
 beautifulsoup4
 lxml
 excel
+telethon
