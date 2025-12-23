@@ -70,9 +70,10 @@ python bot.py
 ```bash
 Python 3.11+
 pyTelegramBotAPI
-Telethon
 pandas
 openpyxl
 beautifulsoup4
 lxml
+excel
+telethon
 ```
