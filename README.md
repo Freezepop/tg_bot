@@ -31,8 +31,8 @@
 1. Клонируйте репозиторий:
 
 ```bash
-git clone https://github.com/your-repo/tg-chat-analyzer.git
-cd tg-chat-analyzer
+git clone https://github.com/Freezepop/tg_bot.git
+cd tg_bot
 ```
 
 2. Создайте виртуальное окружение и установите зависимости:
@@ -68,7 +68,7 @@ python bot.py
 
 Требования:
 ```bash
-Python 3.10+
+Python 3.11+
 pyTelegramBotAPI
 Telethon
 pandas
