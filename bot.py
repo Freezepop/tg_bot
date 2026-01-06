@@ -104,26 +104,72 @@ def process_files(message: Message):
     channels = [{"username": c} for c in sorted(channels)]
 
     if total_users < 50:
+
         def format_user(u):
-            uname = f"@{u['username']}" if u.get("username") else ""
-            fullname = u.get("full_name", "")
-            bio = u.get("bio", "")
-            birthday = u.get("birthday", "")
-            has_channel = "Да" if u.get("has_channel") else "Нет"
-            channel_url = u.get("channel_url", "")
-            return f"{uname}\t{fullname}\t{bio}\t{birthday}\t{has_channel}\t{channel_url}"
+            uname = f"@{u['username']}" if u.get("username") else "—"
+            fullname = u.get("full_name", "—")
+            bio = u.get("bio", "—")
+            birthday = u.get("birthday", "—")
+            has_channel = "✅ Да" if u.get("has_channel") else "❌ Нет"
 
-        users_text = "Участники (Username\tИмя\tОписание\tДата рождения\tНаличие канала\tСсылка на канал):\n"
-        users_text += "\n".join(format_user(u) for u in participants)
+            channel_url = u.get("channel_url")
+            channel_link = (
+                f"<a href='{channel_url}'>Перейти</a>"
+                if channel_url else "—"
+            )
 
-        mentions_text = "Упоминания (@username):\n" + ", ".join([m.get("full_name") or m.get("username", "") for m in mentions])
-        channels_text = "Каналы (username):\n" + ", ".join([c.get("username") for c in channels if not re.findall(r"^\+.*", c['username'])])
+            return (
+                f"<b>{fullname}</b>\n"
+                f"👤 {uname}\n"
+                f"📝 {bio}\n"
+                f"🎂 {birthday}\n"
+                f"📢 Канал: {has_channel}\n"
+                f"🔗 {channel_link}"
+            )
 
-        bot.send_message(chat_id, users_text[:4096])
-        if mentions_text:
-            bot.send_message(chat_id, mentions_text[:4096])
-        if channels_text:
-            bot.send_message(chat_id, channels_text[:4096])
+        # ===== УЧАСТНИКИ =====
+        users_text = "<b>👥 Участники</b>\n\n"
+        users_text += "\n\n".join(format_user(u) for u in participants)
+
+        bot.send_message(
+            chat_id,
+            users_text[:4096],
+            parse_mode="HTML",
+            disable_web_page_preview=True
+        )
+
+        # ===== УПОМИНАНИЯ =====
+        if mentions:
+            mentions_text = "<b>🔔 Упоминания</b>\n"
+            mentions_text += "\n".join(
+                f"• {m.get('full_name') or '@' + m.get('username', '')}"
+                for m in mentions
+            )
+
+            bot.send_message(
+                chat_id,
+                mentions_text[:4096],
+                parse_mode="HTML"
+            )
+
+        # ===== КАНАЛЫ =====
+        filtered_channels = [
+            c for c in channels
+            if c.get("username") and not re.findall(r"^\+.*", c["username"])
+        ]
+
+        if filtered_channels:
+            channels_text = "<b>📺 Каналы</b>\n"
+            channels_text += "\n".join(
+                f"• @{c['username']}"
+                for c in filtered_channels
+            )
+
+            bot.send_message(
+                chat_id,
+                channels_text[:4096],
+                parse_mode="HTML"
+            )
     else:
         excel = generate_excel(participants, mentions, channels, date_now)
 
