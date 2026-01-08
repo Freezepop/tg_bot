@@ -48,6 +48,12 @@ pip install -r requirements.txt
 ```bash
 BOT_TOKEN = "ВАШ_TELEGRAM_BOT_TOKEN"
 MAX_FILES = 10
+
+
+# Данные нужно взять из официального ресурса после регистрации: https://my.telegram.org/apps
+TELETHON_API_ID = "ВАШ_TELEGRAM_API_ID"
+TELETHON_API_HASH = "ВАШ_TELEGRAM_API_HASH"
+TELETHON_SESSION = "ВАШ_TELEGRAM_SESSION_NAME"
 ```
 4. Запустите бота:
 
