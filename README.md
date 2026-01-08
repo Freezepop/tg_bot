@@ -47,7 +47,7 @@ pip install -r requirements.txt
 3. Настройте конфигурацию в config.py:
 ```bash
 BOT_TOKEN = "ВАШ_TELEGRAM_BOT_TOKEN"
-MAX_FILES = 10
+MAX_FILES = 10 # максамильно количество файлов для обработки, принимаемое ботом
 
 
 # Данные нужно взять из официального ресурса после регистрации: https://my.telegram.org/apps
